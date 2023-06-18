@@ -1,11 +1,11 @@
 import {useContext, useState} from "react"
-import {Link, useNavigate} from "react-router-dom"
+import { useNavigate} from "react-router-dom"
 import  {goalsData} from "./intialData"
 import { DataContext } from "./intialData"
 
 export function Home1()
 {
-    const [showHabit,setHabit]=useState(false)
+    const [showHabit,setHabbit]=useState(false)
     const [editHabit,setEdit]=useState({})
     const [editHabit1,setHabit1]=useState(false)
     console.log(goalsData)
@@ -42,9 +42,9 @@ export function Home1()
     return(<div>
         <h1>Habbit Tracker</h1>
         <header>
-        <button onClick={()=>nav("/Archive1")}>Archive</button><button>Add new habbit</button>
+        <button onClick={()=>nav("/Archive1")}>Archive</button><button onClick={()=>setHabbit(!showHabit)}>Add new habbit</button>
         </header>
-        <section>
+        <section className="HabbitDetails-main" style={{display:showHabit?"block":"none"}}>
             <div className="HabbitDetails">
             
                 <div className="HabbitDetails-collecter">
@@ -75,6 +75,7 @@ export function Home1()
                         <input  type="date" id="startDate"></input>
                         <button type="submit">Submit</button>
                     </form>
+                    <button onClick={()=>setHabbit(!showHabit)}>Cancel</button>
                 </div>
             </div>
         </section>
@@ -108,8 +109,9 @@ export function Home1()
                         <input  type="date" id="time_of_day"></input>
                         <button type="submit">Submit</button>
                     </form>
+                    <button style={{marginTop:"20px"}} onClick={()=>{setHabit1(!editHabit1)}}>Cancel</button>
                 </div></div>
-           <div style={{display:"flex"}}>
+           <div style={{display:"flex",justifyContent:"space-between"}}>
            {data.map((val)=><ul>
                 <li>{val.habbit}</li>
                 <button onClick={()=>{setHabit1(!editHabit1);setEdit(val)}}>Edit</button>
