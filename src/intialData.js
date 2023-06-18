@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useState } from "react"
 
 export const goalsData=[
     {
@@ -60,6 +60,6 @@ export function DataProvider({children})
         setGoals([...y])
     }
     return(<>
-        <DataContext.Provider value={{Goals,addNewGoal,removeGoal,addToArchive}}>{children}</DataContext.Provider>
+        <DataContext.Provider value={{Goals,addNewGoal,removeGoal,addToArchive,archive}}>{children}</DataContext.Provider>
     </>)
 }

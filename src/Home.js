@@ -1,6 +1,8 @@
 import {useContext, useState} from "react"
+import {Link, useNavigate} from "react-router-dom"
 import  {goalsData} from "./intialData"
 import { DataContext } from "./intialData"
+
 export function Home1()
 {
     const [showHabit,setHabit]=useState(false)
@@ -9,6 +11,7 @@ export function Home1()
     console.log(goalsData)
     const {Goals,addNewGoal,removeGoal,addToArchive}=useContext(DataContext)
     const data=[...Goals]
+    const nav=useNavigate()
     function submitForm(event)
     {
         event.preventDefault();
@@ -38,10 +41,12 @@ export function Home1()
     }
     return(<div>
         <h1>Habbit Tracker</h1>
+        <header>
+        <button onClick={()=>nav("/Archive1")}>Archive</button><button>Add new habbit</button>
+        </header>
         <section>
-           
             <div className="HabbitDetails">
-            <button>Add new habbit</button>
+            
                 <div className="HabbitDetails-collecter">
                     <form onSubmit={(e) => submitForm(e)}>
                         <label>Habbit Name</label>
