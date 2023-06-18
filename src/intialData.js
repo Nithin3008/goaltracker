@@ -1,40 +1,40 @@
 import { createContext, useState } from "react"
-
+import { v4 as uuidv4 } from 'uuid';
 export const goalsData=[
     {
-        id:1,
+        id:uuidv4(),
         habbit:"Gym",
         repeat:"Daily",
         Goal:"1 time daily",
         time_of_day:"morninig",
-        date:"2023-06-03"
+        date:"Today"
 
     },
     {
-        id:2,
+        id:uuidv4(),
         habbit:"walking",
         repeat:"Daily",
         Goal:"1 time daily",
         time_of_day:"evening",
-        date:"2023-06-01"
+        date:"Yesterday"
         
     },
     {
-        id:3,
+        id:uuidv4(),
         habbit:"Games",
         repeat:"Daily",
         Goal:"2 time daily",
         time_of_day:"Anytime",
-        date:"2023-05-21"
+        date:"Tomrrow"
         
     }, 
     {
-        id:4,
+        id:uuidv4(),
         habbit:"Code",
         repeat:"Daily",
         Goal:"3 time daily",
         time_of_day:"Anytime",
-        date:"2023-05-29"
+        date:"Today"
         
     }
 ]
@@ -59,7 +59,23 @@ export function DataProvider({children})
         setArchive([...archive,x])
         setGoals([...y])
     }
+    function editGoals(goal)
+    {
+        const x=[...Goals].map((val)=>{
+            if(val.id===goal.id)
+            {
+                return goal
+            }
+            else
+            {
+                return val
+            }
+            
+        })
+        console.log(x)
+        setGoals(x)
+    }
     return(<>
-        <DataContext.Provider value={{Goals,addNewGoal,removeGoal,addToArchive,archive}}>{children}</DataContext.Provider>
+        <DataContext.Provider value={{Goals,addNewGoal,removeGoal,addToArchive,archive,editGoals}}>{children}</DataContext.Provider>
     </>)
 }

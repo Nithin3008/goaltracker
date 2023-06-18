@@ -2,7 +2,7 @@ import {useContext, useState} from "react"
 import { useNavigate} from "react-router-dom"
 import  {goalsData} from "./intialData"
 import { DataContext } from "./intialData"
-
+import { v4 as uuidv4 } from 'uuid';
 export function Home1()
 {
     const [showHabit,setHabbit]=useState(false)
@@ -11,7 +11,7 @@ export function Home1()
     const [fullGoal,setGoal]=useState({})
     const [showGoal,setShowGoal]=useState(false)
     console.log(goalsData)
-    const {Goals,addNewGoal,removeGoal,addToArchive}=useContext(DataContext)
+    const {Goals,addNewGoal,removeGoal,addToArchive,editGoals}=useContext(DataContext)
     const data=[...Goals]
     const nav=useNavigate()
     function submitForm(event)
@@ -19,6 +19,7 @@ export function Home1()
         event.preventDefault();
         console.log(event.target.goals.value)
         const newHabbit={
+        id:uuidv4(),
         habbit:event.target.habbitName.value,
         repeat:event.target.repeat.value,
         Goal:event.target.goals.value,
@@ -26,20 +27,24 @@ export function Home1()
         date:event.target.startDate.value
         }
         addNewGoal(newHabbit)
-        console.log(newHabbit)
+        setHabbit(!showHabit)
     }
     function submitForm1(event)
     {
         event.preventDefault();
-        console.log(event.target.goals.value)
         const newHabbit={
-        habbit:editHabit.habbit?editHabit.habbit:event.target.habbitName.value,
-        repeat:editHabit.repeat?editHabit.repeat:event.target.repeat.value,
-        Goal:editHabit.goals?editHabit.goals:event.target.goals.value,
-        time_of_day:editHabit.time_of_day?editHabit.time_of_day:event.target.time_of_day.value,
-        date:editHabit.date?editHabit.data:event.target.startDate.value
+        id:editHabit.id,
+        habbit:event.target.habbitName.value,
+        repeat:event.target.repeat.value,
+        Goal:event.target.goals.value,
+        time_of_day:event.target.time_of_day.value,
+        date:event.target.startDate.value
         }
         console.log(newHabbit)
+        editGoals(newHabbit)
+        setHabit1(!editHabit1)
+        
+
     }
     return(<div>
         <h1>Habbit Tracker</h1>
@@ -73,8 +78,12 @@ export function Home1()
                             <option>Afternon</option>
                             <option>Evening</option>
                         </select>
-                        <label>Start Date</label>
-                        <input  type="date" id="startDate"></input>
+                        <label>Start Day</label>
+                        <select id="startDate">
+                            <option>Today</option>
+                            <option>Tomorrow</option>
+                            <option>Weekend</option>
+                        </select>
                         <button type="submit">Submit</button>
                     </form>
                     <button onClick={()=>setHabbit(!showHabit)}>Cancel</button>
@@ -108,7 +117,11 @@ export function Home1()
                             <option>Evening</option>
                         </select>
                         <label>Start Date</label>
-                        <input  type="date" id="time_of_day"></input>
+                        <select id="startDate">
+                            <option>Today</option>
+                            <option>Tomorrow</option>
+                            <option>Weekend</option>
+                        </select>
                         <button type="submit">Submit</button>
                     </form>
                     <button style={{marginTop:"20px"}} onClick={()=>{setHabit1(!editHabit1)}}>Cancel</button>
