@@ -133,6 +133,7 @@ export function Home1()
                 <li>{fullGoal.Goal}</li>
                 <li>{fullGoal.time_of_day}</li>
                 <li>{fullGoal.date}</li>
+                <button style={{marginTop:"0px"}} onClick={()=>setShowGoal(!showGoal)}>Cancel</button>
             </ul>
                 </div>
            <div style={{display:"flex",justifyContent:"space-between"}}>
