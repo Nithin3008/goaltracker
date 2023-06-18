@@ -21,6 +21,7 @@ h1{
 .GoalData
 {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 
 }
@@ -43,4 +44,8 @@ h1{
   border: 0;
   padding: 8px 10px;
   margin: 85px 10px;
+}
+.editor
+{
+  margin-top: 50px;
 }

@@ -7,6 +7,7 @@ export const goalsData=[
         repeat:"Daily",
         Goal:"1 time daily",
         time_of_day:"morninig",
+        date:"2023-06-03"
 
     },
     {
@@ -15,6 +16,7 @@ export const goalsData=[
         repeat:"Daily",
         Goal:"1 time daily",
         time_of_day:"evening",
+        date:"2023-06-01"
         
     },
     {
@@ -23,6 +25,7 @@ export const goalsData=[
         repeat:"Daily",
         Goal:"2 time daily",
         time_of_day:"Anytime",
+        date:"2023-05-21"
         
     }, 
     {
@@ -31,6 +34,7 @@ export const goalsData=[
         repeat:"Daily",
         Goal:"3 time daily",
         time_of_day:"Anytime",
+        date:"2023-05-29"
         
     }
 ]
@@ -38,8 +42,24 @@ export const DataContext=createContext()
 export function DataProvider({children})
 {
     const [Goals,setGoals]=useState(goalsData)
-
+    const [archive,setArchive]=useState([])
+    function addNewGoal(goal)
+    {
+            setGoals([...Goals,goal])
+    }
+    function removeGoal(goal)
+    {
+        const x=[...Goals].filter((val)=>val.habbit!==goal.habbit)
+        setGoals ([...x])
+    }
+    function addToArchive(goal)
+    {
+        const x=[...Goals].find((val)=>val.habbit===goal.habbit)
+        const y=[...Goals].filter((val)=>val.habbit!==goal.habbit)
+        setArchive([...archive,x])
+        setGoals([...y])
+    }
     return(<>
-        <DataContext.Provider value={{Goals}}>{children}</DataContext.Provider>
+        <DataContext.Provider value={{Goals,addNewGoal,removeGoal,addToArchive}}>{children}</DataContext.Provider>
     </>)
 }
