@@ -8,6 +8,8 @@ export function Home1()
     const [showHabit,setHabbit]=useState(false)
     const [editHabit,setEdit]=useState({})
     const [editHabit1,setHabit1]=useState(false)
+    const [fullGoal,setGoal]=useState({})
+    const [showGoal,setShowGoal]=useState(false)
     console.log(goalsData)
     const {Goals,addNewGoal,removeGoal,addToArchive}=useContext(DataContext)
     const data=[...Goals]
@@ -111,8 +113,17 @@ export function Home1()
                     </form>
                     <button style={{marginTop:"20px"}} onClick={()=>{setHabit1(!editHabit1)}}>Cancel</button>
                 </div></div>
+                <div style={{display:showGoal?"block":"none"}}>
+                <ul>
+                <li>{fullGoal.habbit}</li>
+                <li>{fullGoal.repeat}</li>
+                <li>{fullGoal.Goal}</li>
+                <li>{fullGoal.time_of_day}</li>
+                <li>{fullGoal.date}</li>
+            </ul>
+                </div>
            <div style={{display:"flex",justifyContent:"space-between"}}>
-           {data.map((val)=><ul>
+           {data.map((val)=><ul onClick={()=>{setGoal(val);setShowGoal(!showGoal)}}>
                 <li>{val.habbit}</li>
                 <button onClick={()=>{setHabit1(!editHabit1);setEdit(val)}}>Edit</button>
                 <button onClick={()=>addToArchive(val)}>Move To Archive</button>
